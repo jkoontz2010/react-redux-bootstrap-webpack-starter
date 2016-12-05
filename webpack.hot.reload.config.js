@@ -26,7 +26,8 @@ const config = {
     setNodeEnv()
   ],
   postcss: function () {
-    return [precss, autoprefixer({ browsers: ['last 2 versions'] })];
+    return [precss, autoprefixer({ browsers: ['last 2 versions'] }), 
+  require('postcss-nested')];
   },
   module: {
     loaders: [{
@@ -36,15 +37,27 @@ const config = {
       include: path.join(__dirname, 'src/app')
     },  {
       test: /\.scss$/,
-      loader: 'style!css!postcss!sass'
+      loader: 'style!css!postcss!sass',
+      include: path.join(__dirname, 'src/app/global_style')
     }, {
       test: /\.css$/,
-      loader: 'style!css!postcss'
+      loader: 'style!css!postcss',
+      include: [path.join(__dirname, 'src/app/global_style'), /node_modules/]
+    }, {
+      test: /\.css/,
+      exclude: [path.join(__dirname, 'src/app/global_style'), /node_nodules/],
+      include: path.join(__dirname, 'src/app'),
+      loader: 'style!css?modules&localIdentName=[name]_[local]_[hash:base64:5]!postcss',
+    }, {
+      test: /\.scss/,
+      exclude: [path.join(__dirname, 'src/app/global_style'), /node_nodules/],
+      include: path.join(__dirname, 'src/app'),
+      loader: 'style!css?modules&localIdentName=[name]_[local]_[hash:base64:5]!postcss!sass',
     }, {
       test: /\.json$/,
       loader: 'json'
     }, {
-      test: /\.(eot|woff|woff2|ttf|svg|png|jpe?g|gif)(\?\S*)?$/,
+      test: /\.(eot|woff|woff2|ttf|png|svg|jpe?g|gif)(\?\S*)?$/,
       loader: 'url?limit=100000@name=[name][ext]'
     }]
   }

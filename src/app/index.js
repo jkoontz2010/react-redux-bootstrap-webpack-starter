@@ -1,41 +1,36 @@
-import React                from 'react';
-import {render}             from 'react-dom';
-import injectTpEventPlugin  from 'react-tap-event-plugin';
-import { AppContainer }     from 'react-hot-loader';
-import Root                 from './Root';
-import routes               from './routes/Routes';
+import React from  'react';
+import {render } from 'react-dom';
 
-import 'babel-polyfill';
-import 'animate.css';
-import 'jquery';
-import 'whatwg-fetch';
+// import CSS
+
 import 'font-awesome/css/font-awesome.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
-import './style/index.style.scss';
+import './global_style/index.style.scss';
 
-const ELEMENT_TO_BOOTSTRAP  = 'root';
-const BootstrapedElement    = document.getElementById(ELEMENT_TO_BOOTSTRAP);
+// import components
+import App from './components/App';
 
-injectTpEventPlugin();
+import LandingPage from './components/LandingPage';
+import Parks from './components/Parks';
 
-const renderApp = appRoutes => {
-  render(
-    <AppContainer>
-      <Root routes={appRoutes} />
-    </AppContainer>,
-    BootstrapedElement
-  );
-};
+// import react router deps
+import { Router, Route, IndexRoute } from 'react-router';
+import { Provider } from 'react-redux';
+import store, { history } from './store';
 
-renderApp(routes);
+const router = (
+	<Provider store={store}>
+		<Router history={history}>
+			<Route path="/" component={App}>
+				<IndexRoute component={LandingPage} />
+				<Route path="/parks" component={Parks} />
+			</Route>
+		</Router>
+	</Provider>
 
-if (module.hot) {
-  module.hot.accept(
-    './routes/Routes',
-    () => {
-      const newRoutes = require('./routes/Routes').default;
-      renderApp(newRoutes);
-    }
-  );
-}
+);
+
+render(router, document.getElementById('root'));
+
+
