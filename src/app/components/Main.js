@@ -9,7 +9,7 @@ class Main extends React.Component {
 				<Navbar collapseOnSelect>
 				    <Navbar.Header>
 				      <Navbar.Brand>
-				        <Link to="/">Parks</Link>
+				        <Link to="/">Stache Things</Link>
 				      </Navbar.Brand>
 				      <Navbar.Toggle />
 				    </Navbar.Header>
