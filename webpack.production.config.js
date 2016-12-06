@@ -19,12 +19,19 @@ const config = {
       test: /\.jsx?$/,
       exclude: [nodeModulesDir],
       loader: 'babel'
-    },  {
-      test: /\.css$/,
-      loader: 'style!css!postcss'
-    }, {
+    },    {
       test: /\.scss$/,
-      loader: 'style!css!postcss!sass'
+      loader: 'style!css!postcss!sass',
+      include: path.join(__dirname, 'src/app/global_style')
+    }, {
+      test: /\.css$/,
+      loader: 'style!css!postcss',
+      include: [path.join(__dirname, 'src/app/global_style'), /node_modules/]
+    }, {
+      test: /\.css/,
+      exclude: [path.join(__dirname, 'src/app/global_style'), /node_nodules/],
+      include: path.join(__dirname, 'src/app'),
+      loader: 'style!css?modules&localIdentName=[name]_[local]_[hash:base64:5]!postcss',
     }, {
       test: /\.json$/,
       loader: 'json'

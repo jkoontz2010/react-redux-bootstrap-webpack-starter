@@ -49,11 +49,6 @@ const config = {
       include: path.join(__dirname, 'src/app'),
       loader: 'style!css?modules&localIdentName=[name]_[local]_[hash:base64:5]!postcss',
     }, {
-      test: /\.scss/,
-      exclude: [path.join(__dirname, 'src/app/global_style'), /node_nodules/],
-      include: path.join(__dirname, 'src/app'),
-      loader: 'style!css?modules&localIdentName=[name]_[local]_[hash:base64:5]!postcss!sass',
-    }, {
       test: /\.json$/,
       loader: 'json'
     }, {
