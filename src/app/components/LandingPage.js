@@ -12,9 +12,6 @@ class LandingPage extends React.Component {
 				<h1 className="text-center header">
 					Stash things&mdash;within stashing distance.
 				</h1>
-				<br/>
-				<br/>
-				<br/>
 				<div className="row">
 					<div className="col-sm-offset-3 col-sm-6">
 						<Well>
